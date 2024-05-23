@@ -39,7 +39,8 @@ class TaskController extends Controller
         if (empty($taskId)) {
             $task = [
                 'id' => 0,
-                'userId' => 0,
+                'authorId' => Auth::id(),
+                'ownerId' => 0,
                 'task' => '',
                 'status' => 'new',
             ];
@@ -71,7 +72,8 @@ class TaskController extends Controller
         }
 
         $data = [
-            'userId' => $request->input('userId'),
+            'authorId' => Auth::id(),
+            'ownerId' => $request->input('ownerId'),
             'task' => $request->input('task'),
             'status' => $request->input('status'),
         ];

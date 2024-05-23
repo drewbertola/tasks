@@ -23,10 +23,10 @@
                         value="{{ $task['task'] }}" />
                 </div>
                 <label for="parent">Owner</label>
-                <select class="form-control form-select mb-4" name="userId" id="user">
+                <select class="form-control form-select mb-4" name="ownerId" id="owner">
                     @foreach ($users as $user)
                         <option value="{{ $user['id'] }}"
-                            @if ($task['userId'] === $user['id'])
+                            @if ($task['ownerId'] === $user['id'])
                                 selected
                             @endif
                         >{{ $user['name'] }}</option>

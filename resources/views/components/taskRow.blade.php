@@ -1,6 +1,7 @@
 
 <tr>
     <td class="text-right">#{{ $task->id }}</td>
+    <td>{{ $task->owner->name }}</td>
     <td class="fw-bold">{{ $task->task }}</td>
     <td @class([
         'text-center',

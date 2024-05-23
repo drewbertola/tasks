@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('userId')->nullable(false)->default(0);
+            $table->foreignId('authorId')->nullable(false)->default(0);
+            $table->foreignId('ownerId')->nullable(false)->default(0);
             $table->string('task', 255)->nullable(false)->default('');
             $table->enum('status', ['new', 'started', 'completed'])->default('new');
             $table->timestamps();

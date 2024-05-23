@@ -35,6 +35,7 @@
                     <thead>
                         <tr>
                             <th class="text-center">Id</th>
+                            <th class="text-center">Owner</th>
                             <th class="text-center">Task</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Edit</th>
