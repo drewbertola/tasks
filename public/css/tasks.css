@@ -1,0 +1,22 @@
+div#full-page {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+#content {
+    min-height: 800px;
+    padding: 0 20px;
+    margin: 4px;
+}
+
+nav.navbar-dark {
+    background: #337;
+}
+
+.btn-primary {
+    background: #337;
+}
+
+span.bi {
+    font-size: 1.25rem;
+}
