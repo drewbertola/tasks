@@ -14,7 +14,7 @@
                         id="hideCompleted"
                         type="checkbox"
                         hx-trigger="click"
-                        hx-get="/{{ $hideCompleted === 'hide' ? 'show' : 'hide' }}"
+                        hx-get="{{ $route }}/{{ $hideCompleted === 'hide' ? 'show' : 'hide' }}"
                         hx-target="#content"
                         @if ($hideCompleted === 'hide')
                             checked

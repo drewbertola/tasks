@@ -15,7 +15,9 @@ class TaskController extends Controller
 
         if (! empty(Auth::user())) {
             if ($hideCompleted === 'hide') {
-                $tasks = Task::whereIn('status', ['new', 'started'])->get();
+                $tasks = Task::where([
+                    ['status', '<>', 'completed'],
+                ])->get();
             } else {
                 $tasks = Task::all();
             }
@@ -25,8 +27,58 @@ class TaskController extends Controller
             'isHtmxRequest' => $request->isHtmxRequest(),
             'tasks' => $tasks,
             'hideCompleted' => $hideCompleted,
+            'route' => '',
         ]);
+    }
 
+    public function wrote(HtmxRequest $request, $hideCompleted = 'show')
+    {
+        $tasks = [];
+
+        if (! empty(Auth::user())) {
+            if ($hideCompleted === 'hide') {
+                $tasks = Task::where([
+                    ['status', '<>', 'completed'],
+                    ['authorId', '=', Auth::id()],
+                ])->get();
+            } else {
+                $tasks = Task::where([
+                    ['authorId', '=', Auth::id()],
+                ])->get();
+            }
+        }
+
+        return view('index', [
+            'isHtmxRequest' => $request->isHtmxRequest(),
+            'tasks' => $tasks,
+            'hideCompleted' => $hideCompleted,
+            'route' => '/wrote',
+        ]);
+    }
+
+    public function own(HtmxRequest $request, $hideCompleted = 'show')
+    {
+        $tasks = [];
+
+        if (! empty(Auth::user())) {
+            if ($hideCompleted === 'hide') {
+                $tasks = Task::where([
+                    ['status', '<>', 'completed'],
+                    ['ownerId', '=', Auth::id()],
+                ])->get();
+            } else {
+                $tasks = Task::where([
+                    ['ownerId', '=', Auth::id()],
+                ])->get();
+            }
+        }
+
+        return view('index', [
+            'isHtmxRequest' => $request->isHtmxRequest(),
+            'tasks' => $tasks,
+            'hideCompleted' => $hideCompleted,
+            'route' => '/own',
+        ]);
     }
 
     public function form(HtmxRequest $request, $taskId = 0)

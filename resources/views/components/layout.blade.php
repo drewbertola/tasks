@@ -27,8 +27,34 @@
                         </button>
                         <div class="collapse navbar-collapse" id="main-nav">
                             @auth
+                            <ul class="navbar-nav ms-md-2 me-auto mb-2 mb-md-0">
+                                <li class="nav-item mx-3 mt-2 mt-md-0 mb-2 mb-md-0">
+                                    <a href="" class="nav-link active"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target=".navbar-collapse.show"
+                                        hx-get="/"
+                                        hx-target="#content"
+                                        hx-push-url="true">All Tasks</a>
+                                </li>
+                                <li class="nav-item mx-3 mt-2 mt-md-0 mb-2 mb-md-0">
+                                    <a href="" class="nav-link active"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target=".navbar-collapse.show"
+                                        hx-get="/own"
+                                        hx-target="#content"
+                                        hx-push-url="true">Tasks I Own</a>
+                                </li>
+                                <li class="nav-item mx-3 mt-2 mt-md-0 mb-2 mb-md-0">
+                                    <a href="" class="nav-link active"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target=".navbar-collapse.show"
+                                        hx-get="/wrote"
+                                        hx-target="#content"
+                                        hx-push-url="true">Tasks I Wrote</a>
+                                </li>
+                            </ul>
                             <ul class="navbar-nav ms-md-auto me-md-2 mb-2 mb-md-0">
-                                <li class="nav-item mt-2 mb-md-0">
+                                <li class="nav-item mx-3 mt-2 mt-md-0 mb-4 mb-md-0">
                                     <a href="" class="nav-link active"
                                         data-bs-toggle="collapse"
                                         data-bs-target=".navbar-collapse.show"
