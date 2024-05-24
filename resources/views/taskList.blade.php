@@ -32,7 +32,7 @@
                 ><span class="bi bi-file-earmark-plus-fill"></span></a>
             </div>
             <div class="table-responsive">
-                <table class="table table-hover mx-auto sortableParent" id="menuTable">
+                <table class="table table-hover mx-auto mb-5" id="taskTable">
                     <thead>
                         <tr>
                             <th>Owner</th>
