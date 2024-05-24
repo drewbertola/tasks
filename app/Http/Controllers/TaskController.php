@@ -144,8 +144,8 @@ class TaskController extends Controller
         $data = [
             'authorId' => Auth::id(),
             'ownerId' => $request->input('ownerId'),
-            'task' => $request->input('task'),
-            'status' => $request->input('status'),
+            'task' => strip_tags(trim($request->input('task'))),
+            'status' => strip_tags(trim($request->input('status'))),
         ];
 
         if (empty($taskId)) {

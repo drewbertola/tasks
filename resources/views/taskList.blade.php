@@ -25,7 +25,7 @@
                 </div>
 
                 <a href="" class="float-end"
-                    hx-get="/view/0"
+                    hx-get="/edit/0"
                     hx-target="#content"
                     hx-push-url="true"
                     title="Add Task"
