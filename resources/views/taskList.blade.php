@@ -16,6 +16,7 @@
                         hx-trigger="click"
                         hx-get="{{ $route }}/{{ $hideCompleted === 'hide' ? 'show' : 'hide' }}"
                         hx-target="#content"
+                        hx-push-url="true"
                         @if ($hideCompleted === 'hide')
                             checked
                         @endif
@@ -34,12 +35,10 @@
                 <table class="table table-hover mx-auto sortableParent" id="menuTable">
                     <thead>
                         <tr>
-                            <th class="text-center">Id</th>
-                            <th class="text-center">Owner</th>
-                            <th class="text-center">Task</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Edit</th>
-                            <th class="text-center">Delete</th>
+                            <th>Owner</th>
+                            <th>Task</th>
+                            <th>Status</th>
+                            <th><span class="bi bi-menu-app-fill"></span></th>
                         </tr>
                     </thead>
                     <tbody>

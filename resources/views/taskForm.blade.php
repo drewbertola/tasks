@@ -11,8 +11,9 @@
                 <p>Update a Task</p>
             @endif
             <p id="saveResult" class="text-danger text-center"></p>
-            <form class="clearfix col-md-8 mx-auto">
+            <form id="taskForm" class="clearfix col-md-8 mx-auto">
                 @csrf
+                <input id="referrer" type="hidden" name="referrer" value="{{ $referrer }}" />
                 <div class="mx-auto mb-4">
                     <label class="form-label" for="task-task">Task</label>
                     <input class="form-control mb-2"

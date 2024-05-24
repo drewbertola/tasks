@@ -9,7 +9,7 @@ use Mauricius\LaravelHtmx\Http\HtmxRequest;
 
 class TaskController extends Controller
 {
-    public function index(HtmxRequest $request, $hideCompleted = 'show')
+    public function list(HtmxRequest $request, $hideCompleted = 'show')
     {
         $tasks = [];
 
@@ -23,7 +23,7 @@ class TaskController extends Controller
             }
         }
 
-        return view('index', [
+        return view('taskList', [
             'isHtmxRequest' => $request->isHtmxRequest(),
             'tasks' => $tasks,
             'hideCompleted' => $hideCompleted,
@@ -48,7 +48,7 @@ class TaskController extends Controller
             }
         }
 
-        return view('index', [
+        return view('taskList', [
             'isHtmxRequest' => $request->isHtmxRequest(),
             'tasks' => $tasks,
             'hideCompleted' => $hideCompleted,
@@ -73,7 +73,7 @@ class TaskController extends Controller
             }
         }
 
-        return view('index', [
+        return view('taskList', [
             'isHtmxRequest' => $request->isHtmxRequest(),
             'tasks' => $tasks,
             'hideCompleted' => $hideCompleted,
@@ -81,8 +81,25 @@ class TaskController extends Controller
         ]);
     }
 
+    public function view(HtmxRequest $request, $taskId)
+    {
+        // handle requests from timed out logins
+        if (empty(Auth::user())) {
+            return redirect('/');
+        }
+
+        $task = Task::find($taskId);
+
+        return view('taskView', [
+            'isHtmxRequest' => $request->isHtmxRequest(),
+            'task' => $task,
+        ]);
+    }
+
     public function form(HtmxRequest $request, $taskId = 0)
     {
+        $referrer = parse_url($_SERVER['HTTP_REFERER'])['path'];
+
         // handle requests from timed out logins
         if (empty(Auth::user())) {
             return redirect('/');
@@ -106,6 +123,7 @@ class TaskController extends Controller
             'isHtmxRequest' => $request->isHtmxRequest(),
             'task' => $task,
             'users' => $users,
+            'referrer' => $referrer,
         ]);
     }
 
@@ -140,7 +158,7 @@ class TaskController extends Controller
         return response(
             view('saveResult', [
                 'message' => 'success'
-            ]), 200, ['HX-Redirect' => '/']
+            ]), 200, ['HX-Redirect' => $request->input('referrer')]
         );
 
 
