@@ -29,7 +29,7 @@
                     hx-target="#content"
                     hx-push-url="true"
                     title="Add Task"
-                ><span class="bi bi-file-earmark-plus-fill"></span></a>
+                ><span class="bi bi-file-earmark-plus-fill fs-4"></span></a>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover mx-auto mb-5" id="taskTable">
@@ -38,7 +38,7 @@
                             <th>Owner</th>
                             <th>Task</th>
                             <th>Status</th>
-                            <th class="text-center"><span class="bi bi-menu-button-fill"></span></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

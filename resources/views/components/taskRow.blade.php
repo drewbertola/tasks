@@ -17,8 +17,8 @@
     ])>{{ $task->status }}</td>
     <td class="text-center">
         <div class="dropdown">
-            <a href="#" class="dropdown-toggle fw-bold fs-6 text-dark link-underline-light" role="button" data-bs-toggle="dropdown">
-                &hellip;
+            <a href="#" class="fw-bold text-dark link-underline-light fs-4 pb-2" role="button" data-bs-toggle="dropdown">
+                <span class="bi bi-three-dots"></span>
             </a>
             <ul class="dropdown-menu">
                 <a href="" class="text-dark link-underline-light"
