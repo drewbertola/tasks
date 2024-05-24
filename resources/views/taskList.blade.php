@@ -38,7 +38,7 @@
                             <th>Owner</th>
                             <th>Task</th>
                             <th>Status</th>
-                            <th><span class="bi bi-menu-app-fill"></span></th>
+                            <th><span class="bi bi-menu-button-fill"></span></th>
                         </tr>
                     </thead>
                     <tbody>
