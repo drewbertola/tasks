@@ -176,7 +176,7 @@ class TaskController extends Controller
         return response(
             view('result', [
                 'message' => 'success'
-            ]), 200, ['HX-Redirect' => '/']
+            ]), 200, ['HX-Refresh' => 'true']
         );
 
     }
