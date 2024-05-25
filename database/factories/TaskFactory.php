@@ -19,7 +19,8 @@ class TaskFactory extends Factory
     {
         return [
             'task' => fake()->words(rand(4, 9), true),
-            'status' => fake()->randomElement(['new', 'started', 'completed']),
+            'priority' => fake()->randomElement([1, 2, 3, 4]),
+            'status' => fake()->randomElement([1, 2, 3]),
             'ownerId' => User::all()->random()->id,
             'authorId' => User::all()->random()->id,
         ];

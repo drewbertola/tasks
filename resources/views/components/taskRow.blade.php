@@ -1,6 +1,16 @@
 
-<tr>
+<tr @class(['dataRow', 'd-none' => $task['status'] === '3'])>
     <td>{{ $task->owner->name }}</td>
+    <td class="text-center">
+        <span @class([
+            'bi',
+            'bi-circle-fill',
+            'fs-6',
+            'text-danger' => $task['priority'] === '1',
+            'text-success' => $task['priority'] === '2',
+            'text-primary' => $task['priority'] === '3',
+            'text-secondary' => $task['priority'] === '4',
+            ])</span>
     <td class="fw-bold">
         <a href="" class="text-dark"
             hx-get="/view/{{ $task['id'] }}"
@@ -8,13 +18,22 @@
             hx-push-url="true"
         >{{ $task->task }}</a>
     </td>
+    @php
+        switch ($task['status']) {
+            case '1': $status = 'New'; break;
+            case '2': $status = 'Started'; break;
+            case '3': $status = 'Completed'; break;
+            default: $status = '???';
+        };
+    @endphp
     <td @class([
+        'status',
         'text-capitalize',
         'fw-bold',
-        'text-danger' => $task['status'] === 'new',
-        'text-primary' => $task['status'] === 'started',
-        'text-success' => $task['status'] === 'completed',
-    ])>{{ $task->status }}</td>
+        'text-danger' => $task['status'] === '1',
+        'text-primary' => $task['status'] === '2',
+        'text-success' => $task['status'] === '3',
+    ])>{{ $status }}</td>
     <td class="text-center">
         <div class="dropdown">
             <a href="#" class="fw-bold text-dark link-underline-light fs-4 pb-2" role="button" data-bs-toggle="dropdown">

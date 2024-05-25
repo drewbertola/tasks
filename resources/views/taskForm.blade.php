@@ -33,26 +33,49 @@
                         >{{ $user['name'] }}</option>
                     @endforeach
                 </select>
+                <label for="priority">Priority</label>
+                <select class="form-control form-select mb-4" name='priority' id='priority'>
+                    <option value="1"
+                        @if($task['priority'] === '1')
+                            selected
+                        @endif
+                    >Urgent</option>
+                    <option value="2"
+                        @if($task['priority'] === '2')
+                            selected
+                        @endif
+                    >High</option>
+                    <option value="3"
+                        @if($task['priority'] === '3')
+                            selected
+                        @endif
+                    >Normal</option>
+                    <option value="4"
+                        @if($task['priority'] === '4')
+                            selected
+                        @endif
+                    >Low</option>
+                </select>
                 <label for="status">Status</label>
                 <select class="form-control form-select mb-4" name="status" id="status">
-                    <option value="new"
-                        @if($task['status'] === 'new')
+                    <option value="1"
+                        @if($task['status'] === '1')
                             selected
                         @endif
                     >New</option>
-                    <option value="started"
+                    <option value="2"
                         @if($task['id'] === 0)
                             disabled
                         @endif
-                        @if($task['status'] === 'started')
+                        @if($task['status'] === '2')
                             selected
                         @endif
                     >Started</option>
-                    <option value="completed"
+                    <option value="3"
                         @if($task['id'] === 0)
                             disabled
                         @endif
-                        @if($task['status'] === 'completed')
+                        @if($task['status'] === '3')
                             selected
                         @endif
                     >Completed</option>

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('authorId')->nullable(false)->default(0);
             $table->foreignId('ownerId')->nullable(false)->default(0);
             $table->string('task', 255)->nullable(false)->default('');
-            $table->enum('status', ['new', 'started', 'completed'])->default('new');
+            $table->enum('priority', [1, 2, 3, 4])->default(3);
+            $table->enum('status', [1, 2, 3])->default(1);
             $table->timestamps();
         });
     }

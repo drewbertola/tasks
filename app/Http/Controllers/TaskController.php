@@ -9,75 +9,92 @@ use Mauricius\LaravelHtmx\Http\HtmxRequest;
 
 class TaskController extends Controller
 {
-    public function list(HtmxRequest $request, $hideCompleted = 'show')
+    public function list(HtmxRequest $request, $by = '', $dir = '')
     {
         $tasks = [];
 
         if (! empty(Auth::user())) {
-            if ($hideCompleted === 'hide') {
-                $tasks = Task::where([
-                    ['status', '<>', 'completed'],
-                ])->get();
-            } else {
-                $tasks = Task::all();
+            $query = Task::where([
+                ['id', '>', 0],
+            ]);
+
+            if (! empty($by)) {
+                if ($dir === 'desc') {
+                    $query->orderByDesc($by);
+                } else {
+                    $query->orderBy($by);
+                }
             }
+
+            $tasks = $query->get();
         }
+
+        $tasks = $query->get();
 
         return view('taskList', [
             'isHtmxRequest' => $request->isHtmxRequest(),
             'tasks' => $tasks,
-            'hideCompleted' => $hideCompleted,
-            'route' => '',
+            'route' => '/',
+            'by' => $by,
+            'dir' => $dir,
         ]);
     }
 
-    public function wrote(HtmxRequest $request, $hideCompleted = 'show')
+    public function wrote(HtmxRequest $request, $by = '', $dir = '')
     {
         $tasks = [];
 
         if (! empty(Auth::user())) {
-            if ($hideCompleted === 'hide') {
-                $tasks = Task::where([
-                    ['status', '<>', 'completed'],
-                    ['authorId', '=', Auth::id()],
-                ])->get();
-            } else {
-                $tasks = Task::where([
-                    ['authorId', '=', Auth::id()],
-                ])->get();
+            $query = Task::where([
+                ['authorId', '=', Auth::id()],
+            ]);
+
+            if (! empty($by)) {
+                if ($dir === 'desc') {
+                    $query->orderByDesc($by);
+                } else {
+                    $query->orderBy($by);
+                }
             }
+
+            $tasks = $query->get();
         }
 
         return view('taskList', [
             'isHtmxRequest' => $request->isHtmxRequest(),
             'tasks' => $tasks,
-            'hideCompleted' => $hideCompleted,
-            'route' => '/wrote',
+            'route' => '/wrote/',
+            'by' => $by,
+            'dir' => $dir,
         ]);
     }
 
-    public function own(HtmxRequest $request, $hideCompleted = 'show')
+    public function own(HtmxRequest $request, $by = '', $dir = '')
     {
         $tasks = [];
 
         if (! empty(Auth::user())) {
-            if ($hideCompleted === 'hide') {
-                $tasks = Task::where([
-                    ['status', '<>', 'completed'],
-                    ['ownerId', '=', Auth::id()],
-                ])->get();
-            } else {
-                $tasks = Task::where([
-                    ['ownerId', '=', Auth::id()],
-                ])->get();
+            $query = Task::where([
+                ['ownerId', '=', Auth::id()],
+            ]);
+
+            if (! empty($by)) {
+                if ($dir === 'desc') {
+                    $query->orderByDesc($by);
+                } else {
+                    $query->orderBy($by);
+                }
             }
+
+            $tasks = $query->get();
         }
 
         return view('taskList', [
             'isHtmxRequest' => $request->isHtmxRequest(),
             'tasks' => $tasks,
-            'hideCompleted' => $hideCompleted,
-            'route' => '/own',
+            'route' => '/own/',
+            'by' => $by,
+            'dir' => $dir,
         ]);
     }
 
@@ -98,7 +115,11 @@ class TaskController extends Controller
 
     public function form(HtmxRequest $request, $taskId = 0)
     {
-        $referrer = parse_url($_SERVER['HTTP_REFERER'])['path'];
+        if (empty($_SERVER['HTTP_REFERER'])) {
+            $referrer = '/';
+        } else {
+            $referrer = parse_url($_SERVER['HTTP_REFERER'])['path'];
+        }
 
         // handle requests from timed out logins
         if (empty(Auth::user())) {
@@ -111,7 +132,8 @@ class TaskController extends Controller
                 'authorId' => Auth::id(),
                 'ownerId' => 0,
                 'task' => '',
-                'status' => 'new',
+                'status' => '1',
+                'priority' => '3',
             ];
         } else {
             $task = Task::find($taskId);
@@ -146,6 +168,7 @@ class TaskController extends Controller
             'ownerId' => $request->input('ownerId'),
             'task' => strip_tags(trim($request->input('task'))),
             'status' => strip_tags(trim($request->input('status'))),
+            'priority' => strip_tags(trim($request->input('priority'))),
         ];
 
         if (empty($taskId)) {

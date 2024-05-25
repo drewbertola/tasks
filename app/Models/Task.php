@@ -11,9 +11,10 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
-        'task',
         'authorId',
         'ownerId',
+        'task',
+        'priority',
         'status',
     ];
 

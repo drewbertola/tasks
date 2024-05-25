@@ -16,3 +16,7 @@ nav.navbar-dark {
 .btn-primary {
     background: #337;
 }
+
+th.nowrap {
+    white-space: nowrap;
+}
