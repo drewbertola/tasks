@@ -29,8 +29,6 @@ class TaskController extends Controller
             $tasks = $query->get();
         }
 
-        $tasks = $query->get();
-
         return view('taskList', [
             'isHtmxRequest' => $request->isHtmxRequest(),
             'tasks' => $tasks,
