@@ -40,13 +40,13 @@
                 <span class="bi bi-three-dots"></span>
             </a>
             <ul class="dropdown-menu">
-                <a href="" class="text-dark link-underline-light"
+                <a href="" class="link-underline-light"
                     hx-get="/edit/{{ $task['id'] }}"
                     hx-target="#content"
                     hx-push-url="true">
-                    <li class="dropdown-item">Edit Task</li>
+                    <li class="dropdown-item text-primary">Edit Task</li>
                 </a>
-                    <a href="" class="text-dark link-underline-light"
+                    <a href="" class="link-underline-light"
                         hx-get="/delete/{{ $task['id'] }}"
                         hx-trigger='confirmed'
                         onClick="
@@ -65,7 +65,7 @@
                                     Swal.fire('Task not deleted!', '', 'info')
                                 }
                             });">
-                        <li class="dropdown-item">Delete Task</li>
+                        <li class="dropdown-item text-danger">Delete Task</li>
                     </a>
                 </li>
             </ul>
