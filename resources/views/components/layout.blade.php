@@ -1,4 +1,4 @@
-@props(['isHtmxRequest'])
+@props(['isHtmxRequest', 'searchQuery'])
 
 @empty($isHtmxRequest)
 <!DOCTYPE html>
@@ -29,29 +29,64 @@
                         <div class="collapse navbar-collapse" id="main-nav">
                             @auth
                             <ul class="navbar-nav ms-md-2 me-auto mb-2 mb-md-0">
-                                <li class="nav-item mx-3 mt-2 mt-md-0 mb-2 mb-md-0">
-                                    <a href="" class="nav-link active"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target=".navbar-collapse.show"
-                                        hx-get="/"
-                                        hx-target="#content"
-                                        hx-push-url="true">All Tasks</a>
+                                <li class="nav-item dropdown mx-3 mt-2 mt-md-0 mb-2 mb-md-0">
+                                    <a href="" class="nav-link active dropdown-toggle"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        View
+                                    </a>
+                                    <ul id="navView" class="dropdown-menu">
+                                        <li>
+                                            <a href="" class="dropdown-item"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#navView.show"
+                                                hx-get="/"
+                                                hx-target="#content"
+                                                hx-push-url="true">All</a>
+                                        </li>
+                                        <li>
+                                            <a href="" class="dropdown-item"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#navView.show"
+                                                hx-get="/own"
+                                                hx-target="#content"
+                                                hx-push-url="true">I Own</a>
+                                        </li>
+                                        <li>
+                                            <a href="" class="dropdown-item"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#navView.show"
+                                                hx-get="/wrote"
+                                                hx-target="#content"
+                                                hx-push-url="true">I Wrote</a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li class="nav-item mx-3 mt-2 mt-md-0 mb-2 mb-md-0">
-                                    <a href="" class="nav-link active"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target=".navbar-collapse.show"
-                                        hx-get="/own"
-                                        hx-target="#content"
-                                        hx-push-url="true">Tasks I Own</a>
-                                </li>
-                                <li class="nav-item mx-3 mt-2 mt-md-0 mb-2 mb-md-0">
-                                    <a href="" class="nav-link active"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target=".navbar-collapse.show"
-                                        hx-get="/wrote"
-                                        hx-target="#content"
-                                        hx-push-url="true">Tasks I Wrote</a>
+                                    <form id="searchForm">
+                                        <div class="input-group">
+                                            @csrf
+                                            <input type="text" class="form-control py-1 mt-1"
+                                                name="searchQuery"
+                                                value="{{ $searchQuery }}"
+                                                placeholder="Search Tasks..."
+                                                onkeyup="
+                                                    const btn = document.getElementById('searchSubmit');
+                                                    if (event.key !== 'Enter') {
+                                                        btn.setAttribute('hx-get',
+                                                            '/search/' + this.value.replace(' ', '+')
+                                                        );
+                                                        htmx.process('#searchSubmit');
+                                                    }
+                                                " />
+                                            <button id="searchSubmit" type="submit" class="input-group-text bi bi-search py-1 mt-1"
+                                                    hx-get=""
+                                                    hx-target="#content"
+                                                    hx-push-url="true"
+                                            </button>
+                                        </div>
+                                    </form>
                                 </li>
                             </ul>
                             <ul class="navbar-nav ms-md-auto me-md-2 mb-2 mb-md-0">

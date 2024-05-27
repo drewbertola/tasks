@@ -17,6 +17,7 @@ Route::get('/own/{by}/{dir}', [TaskController::class, 'own']);
 Route::get('/own', [TaskController::class, 'own']);
 Route::get('/wrote/{by}/{dir}', [TaskController::class, 'wrote']);
 Route::get('/wrote', [TaskController::class, 'wrote']);
+Route::get('/search/{searchQuery}', [TaskController::class, 'search']);
 Route::get('/{by}/{dir}/', [TaskController::class, 'list']);
 Route::get('/', [TaskController::class, 'list']);
 

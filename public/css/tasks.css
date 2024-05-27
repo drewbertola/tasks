@@ -13,6 +13,37 @@ nav.navbar-dark {
     background: #337;
 }
 
+#navView {
+    background: #337;
+}
+#navView li a {
+    color: #eee;
+}
+#navView li a:hover {
+    background: #559;
+    color: #fff;
+}
+
+#searchForm input {
+    background: #559;
+    color: #eee;
+    border: 1px #559 solid;
+    border-radius: none;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+#searchForm input::placeholder {
+    color: #ddd;
+}
+#searchForm button {
+    background: #448;
+    color: #eee;
+    border: 1px #559 solid;
+    border-radius: none;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
 .btn-primary {
     background: #337;
 }

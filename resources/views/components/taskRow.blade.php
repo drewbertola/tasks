@@ -1,4 +1,3 @@
-
 <tr @class(['dataRow', 'd-none' => $task['status'] === '3'])>
     <td>{{ $task->owner->name }}</td>
     <td class="text-center">
@@ -34,10 +33,10 @@
         'text-primary' => $task['status'] === '2',
         'text-success' => $task['status'] === '3',
     ])>{{ $status }}</td>
-    <td class="text-center">
+    <td class="text-center pt-0">
         <div class="dropdown">
             <a href="#" class="fw-bold text-dark link-underline-light fs-4 pb-2" role="button" data-bs-toggle="dropdown">
-                <span class="bi bi-three-dots"></span>
+                <span class="bi bi-three-dots-vertical fs-6"></span>
             </a>
             <ul class="dropdown-menu">
                 <a href="" class="link-underline-light"

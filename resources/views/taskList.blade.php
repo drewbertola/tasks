@@ -1,6 +1,12 @@
 @section("title", "Admin")
 
-<x-layout :isHtmxRequest=$isHtmxRequest>
+@php
+    $searchQuery = $searchQuery ?? '';
+    $by = $by ?? '';
+    $dir = $dir ?? '';
+@endphp
+
+<x-layout :isHtmxRequest=$isHtmxRequest :searchQuery=$searchQuery >
     @guest
         <x-login />
     @endguest
@@ -31,32 +37,50 @@
                         <tr>
                             <th>Owner</th>
                             <th class="text-center nowrap"
-                                hx-trigger="click"
-                                hx-target="#content"
-                                @if ($dir === 'asc')
-                                    hx-get="{{ $route }}priority/desc"
-                                @else
-                                    hx-get="{{ $route }}priority/asc"
+                                @if ($route !== '/search')
+                                    hx-trigger="click"
+                                    hx-target="#content"
+                                    @if ($dir === 'asc')
+                                        hx-get="{{ $route }}priority/desc"
+                                    @else
+                                        hx-get="{{ $route }}priority/asc"
+                                    @endif
                                 @endif
-                            >Priority <span class="bi bi-arrow-down-up fs-6"></span></th>
+                            >Priority
+                                @if ($route !== '/search')
+                                    <span class="bi bi-arrow-down-up fs-6"></span>
+                                @endif
+                            </th>
                             <th class="nowrap"
-                                hx-trigger="click"
-                                hx-target="#content"
-                                @if ($dir === 'asc')
-                                    hx-get="{{ $route }}task/desc"
-                                @else
-                                    hx-get="{{ $route }}task/asc"
+                                @if ($route !== '/search')
+                                    hx-trigger="click"
+                                    hx-target="#content"
+                                    @if ($dir === 'asc')
+                                        hx-get="{{ $route }}task/desc"
+                                    @else
+                                        hx-get="{{ $route }}task/asc"
+                                    @endif
                                 @endif
-                            >Task <span class="bi bi-arrow-down-up fs-6"></span></th>
+                            >Task
+                                @if ($route !== '/search')
+                                    <span class="bi bi-arrow-down-up fs-6"></span>
+                                @endif
+                            </th>
                             <th class="nowrap"
-                                hx-trigger="click"
-                                hx-target="#content"
-                                @if ($dir === 'asc')
-                                    hx-get="{{ $route }}status/desc"
-                                @else
-                                    hx-get="{{ $route }}status/asc"
+                                @if ($route !== '/search')
+                                    hx-trigger="click"
+                                    hx-target="#content"
+                                    @if ($dir === 'asc')
+                                        hx-get="{{ $route }}status/desc"
+                                    @else
+                                        hx-get="{{ $route }}status/asc"
+                                    @endif
                                 @endif
-                            >Status <span class="bi bi-arrow-down-up fs-6"></span></th>
+                            >Status
+                                @if ($route !== '/search')
+                                    <span class="bi bi-arrow-down-up fs-6"></span>
+                                @endif
+                            </th>
                             <th></th>
                         </tr>
                     </thead>

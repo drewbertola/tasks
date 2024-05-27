@@ -96,6 +96,26 @@ class TaskController extends Controller
         ]);
     }
 
+    public function search(HtmxRequest $request, string $searchQuery)
+    {
+        $tasks = [];
+
+        if (! empty(Auth::user())) {
+            $tasks = Task::search($searchQuery)
+                ->options([
+                    'query_by' => 'task, owner, author'
+                ])
+                ->get();
+        }
+
+        return view('taskList', [
+            'isHtmxRequest' => $request->isHtmxRequest(),
+            'tasks' => $tasks,
+            'route' => '/search',
+            'searchQuery' => str_replace('+', ' ', $searchQuery),
+        ]);
+    }
+
     public function view(HtmxRequest $request, $taskId)
     {
         // handle requests from timed out logins
