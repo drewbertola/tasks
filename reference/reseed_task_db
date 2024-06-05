@@ -1,0 +1,7 @@
+#!/bin/bash
+
+. /etc/profile
+
+/var/www/tasks/artisan db:seed
+/var/www/tasks/artisan scout:flush "\App\Models\Task"
+/var/www/tasks/artisan scout:import "\App\Models\Task"
